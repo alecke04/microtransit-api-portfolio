@@ -1,5 +1,7 @@
 # MicroTransit API — Portfolio Edition
 
+[![Portfolio verification](https://github.com/alecke04/microtransit-api-portfolio/actions/workflows/ci.yml/badge.svg)](https://github.com/alecke04/microtransit-api-portfolio/actions/workflows/ci.yml)
+
 A standalone, sanitized edition of the GPS ingestion and live-update backend from my MicroTransit project. It demonstrates **FastAPI, asynchronous SQLAlchemy, PostgreSQL/PostGIS, device authentication, transactional writes and WebSockets** with generated demo data.
 
 The companion [Next.js frontend](https://github.com/alecke04/microtransit-frontend) illustrates the browser side of the original system: initial GPS history over REST, followed by live updates over WebSockets.
@@ -34,7 +36,7 @@ python -m venv .venv
 # Activate .venv using the command for your shell.
 python -m pip install -r requirements-dev.txt
 python -m scripts.setup_demo
-docker compose up -d db
+docker compose up -d --wait db
 python -m scripts.bootstrap_db
 uvicorn main:app --host 127.0.0.1 --port 8000 --workers 1 --ws-max-size 1024 --ws-max-queue 4 --limit-concurrency 128 --timeout-keep-alive 5 --no-proxy-headers
 ```
